@@ -3,10 +3,10 @@ import {TimeStamps} from "@/models/adminModel" ;
 
 export interface SubCategory extends Document ,TimeStamps {
     ca_name:string ,
-    ca_description:string ,
-    ca_image:string ,
-    ca_video:string,
-    ca_videoFile:string
+    ca_des:string ,
+    ca_image:string , 
+    ca_serve_image :string
+    ca_video:string
 } 
 
 const SubCategory_Schema = new mongoose.Schema<SubCategory>({
@@ -15,7 +15,7 @@ const SubCategory_Schema = new mongoose.Schema<SubCategory>({
         required:true,
         unique:true
     } ,
-    ca_description:{
+    ca_des:{
         type:String ,
         required:true,
         unique:true
@@ -24,15 +24,15 @@ const SubCategory_Schema = new mongoose.Schema<SubCategory>({
         type:String ,
         required:true
     } ,
+    ca_serve_image :{
+        type:String ,
+        
+    },
     ca_video:{
         type:String ,
-        required:true
     },
-    ca_videoFile:{
-        type:String ,
-        required:true
-    }
-}) ;
+    
+},{timestamps:true}) ;
 
 
 export const sub_categoryModel = mongoose.models.SubCategory as mongoose.Model<SubCategory>  || mongoose.model<SubCategory>("SubCategory",SubCategory_Schema) ;
