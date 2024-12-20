@@ -31,6 +31,31 @@ export const blogSchema = new Schema<Blogs>({
 
 },{timestamps:true}) ;
 
+blogSchema.pre('deleteOne',{document:true , query:false},async function(next) {
+   try {
+         
+    const commentsId = this.comments ; 
+    if(commentsId && commentsId.length > 0) { 
+      await mongoose.model('Comments').deleteMany({
+          _id:{$in:commentsId}
+      }) ; 
+   
+      await mongoose.model('Blogs').updateMany(
+          {comments:{$in : commentsId}} , 
+          {$pull : {comments:{$in:commentsId}}}
+      ) ;
+      next() ; 
+       }
+    } catch (err:any) {
+         next(err); 
+       }
+      
+}) ;
 
 export const blogModel = mongoose.models.Blogs as mongoose.Model<Blogs>
  || model<Blogs>("Blogs",blogSchema) ;
+
+
+
+
+ 

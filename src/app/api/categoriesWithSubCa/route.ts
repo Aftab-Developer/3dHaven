@@ -10,12 +10,16 @@ export async function GET(request:NextRequest){
         const decodeCategoryName = decodeURIComponent(categoryName as string) ; 
 
         const categoryWithSubCategory = await categoryModel
-        .find({ca_name:decodeCategoryName})
-        .populate("SubCategory")
-        .exec() ; 
-        if(!categoryWithSubCategory) return  NextResponse.json({message:"No category exsists",success:false},{status:400}) ; 
+        .find({ca_name:decodeCategoryName}) ;
+       
+        if(!categoryWithSubCategory){ return  NextResponse.json({message:"No category exsists",success:false},{status:400}) ; }
+         
+        const categoryWithSubCategoryPopulate = await categoryModel
+        .find({ca_name:decodeCategoryName}).populate('sub_category');
 
-        return NextResponse.json({message:"here is  the category",categoryWithSubCategory,success:true},{status:200}) ;
+
+
+        return NextResponse.json({message:"here is  the category",categoryWithSubCategoryPopulate,success:true},{status:200}) ;
         } catch (error) {
         console.log(`some error in category names ${error}`) ;
             

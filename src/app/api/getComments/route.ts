@@ -7,7 +7,7 @@ export async function GET(request:NextRequest) {
         const id = searchParams.get("id") ;
         if(!id) return NextResponse.json({message:"id is needed",success:false},{status:400}) ;
         const decodeId = decodeURIComponent(id as string) ; 
-       const isHasComments = await commentsModel.find({_id:id}) ; 
+       const isHasComments = await commentsModel.find({_id:decodeId}) ; 
        if(!isHasComments)  NextResponse.json({message:"no comments found",success:false},{status:400}) ; 
        NextResponse.json({message:"here is all comments ",isHasComments,success:true},{status:200}) ;
     } catch (error) {

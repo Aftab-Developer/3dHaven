@@ -1,39 +1,24 @@
 "use client"
+import { useSearchParams } from 'next/navigation';
 
-import { useState } from "react";
+import { signIn } from 'next-auth/react';
 
-export default function Home() {  
-  const [data,setData] = useState<any>({
-    ca_name : "" ,
-    ca_des : "" ,
-    ca_image : ""
-  }) 
-  const submitHandler = async() => {
-     try {
+export default function Home() {
+ // Assuming you get the code from the URL
 
-      const formData = new FormData() ; 
-      formData.append('ca_name',data.ca_name) ;
-      formData.append('ca_des',data.ca_des) ;
-      formData.append('file',data.ca_image) ; 
-       
-      const response = await fetch("/api/createCategory",{  
-        method : "POST" ,
-        body:formData  
-        
-      }) ; 
-      const jsonData = await response.json() ; 
-      console.log(jsonData);
-      
 
-     } catch (error) {
-      console.error("some frontend error");
-      
-     }
-  }
- 
+  const clickHandler =async () => {
+    await signIn("patreon");
+  };
+
   return (
-  <h1>
-    hellow world
-  </h1>
+    <h1>
+      <button onClick={clickHandler} className="bg-red-400 p-4 rounded-md text-white">
+        Join at Patreon
+      </button>
+      <div>
+        
+      </div>
+    </h1>
   );
 }

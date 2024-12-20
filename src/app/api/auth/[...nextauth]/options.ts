@@ -1,9 +1,7 @@
 import { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { adminModel } from "@/models/adminModel";
-import { dbConnect } from "@/utils/dbConnect";
-import { NextRequest, NextResponse } from "next/server";
-import bcrypt from "bcryptjs"
+
 
 export const authOptions:NextAuthOptions = {
     providers: [
@@ -26,5 +24,6 @@ export const authOptions:NextAuthOptions = {
   }), 
   
   
-]
-} ;
+] 
+
+}
