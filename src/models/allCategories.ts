@@ -31,27 +31,7 @@ const categoriesSchema = new mongoose.Schema<Cetegory>(
  
 ) ; 
 
-categoriesSchema.post("deleteOne", { document: true, query: false }, async function () {
-    try {
-      
-      const subCategoryIds = this.sub_category;
-  
-      if (subCategoryIds && subCategoryIds.length > 0) {
-        await mongoose.model("SubCategory").deleteMany({
-          _id: { $in: subCategoryIds },
-        });
-      
-    
-      await mongoose.model("Category").updateMany(
-          { sub_category: { $in: subCategoryIds } },
-          { $pull: { sub_category: { $in: subCategoryIds } } }
-        );
-      } 
-      
-    } catch (err:any) {
-     
-    }
-  });
+
 
 export const categoryModel = mongoose.models.Category as mongoose.Model<Cetegory>  || mongoose.model<Cetegory>("Category",categoriesSchema) ;
 

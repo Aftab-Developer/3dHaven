@@ -23,5 +23,5 @@ export const commentsSchema = new Schema<Comments>({
     
 },{timestamps:true}) ;
 
-export const commentsModel = mongoose.models.Comments as mongoose.Model<Comments>
- || model<Comments>("Comments",commentsSchema) ; 
+export const commentsModel = mongoose.models.Blogcomments as mongoose.Model<Comments>
+ || model<Comments>("Blogcomments",commentsSchema) ; 
