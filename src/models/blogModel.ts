@@ -20,7 +20,7 @@ export const blogSchema = new Schema<Blogs>({
     } , 
     blog_image: {
         type:String ,
-        required:false
+        required:true
     } , 
     comments:[
         {
